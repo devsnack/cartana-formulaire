@@ -84,10 +84,80 @@
       .tab {
         display: none;
       }
+      .banner {
+        text-align: center;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .banner h1 {
+        background: black;
+        padding: 20px;
+        color: white;
+        position: relative;
+      }
+      .banner .bigbanner {
+        width: 100%;
+      }
+
+      .banner h1:before {
+        display: block;
+        content: "";
+        width: 15%;
+        height: 15px;
+        background: white;
+        position: absolute;
+        top: 43%;
+        right: 7%;
+      }
+      .banner h1:after {
+        display: block;
+        content: "";
+        width: 15%;
+        height: 15px;
+        background: white;
+        position: absolute;
+        top: 43%;
+        left: 7%;
+      }
+      .mbbanner {
+        display: none;
+        width: 100%;
+      }
+      .stepper {
+        margin-bottom: 20px;
+      }
+      .actuelstep {
+        font-weight: bold;
+      }
+      @media only screen and (max-width: 768px) {
+        .banner h1:before,
+        .banner h1:after {
+          display: none;
+        }
+        .mbbanner {
+          display: inline-block;
+          width: 100%;
+        }
+        .bigbanner {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="banner">
+      <img class="bigbanner" src="banner.jpg" />
+      <img class="mbbanner" src="bannerx1.jpg" />
+      <h1>QUESTIONNAIRE DE SATISFACTION</h1>
+    </div>
+
     <form class="form needs-validation">
+      <div class="stepper">
+        <p>■ Informations et Coordonnées</p>
+        <p>■ Coordonnées Questionnaire</p>
+        <p>■ Terminé</p>
+      </div>
       <div id="hide" class="hide">
         <div
           class="alert alert-danger alert-dismissible fade show"
@@ -103,7 +173,6 @@
         </div>
       </div>
 
-      <h1>formulaire infos</h1>
       <div class="tab">
         <div class="mb-3">
           <label for="fullname" class="form-label"
@@ -1172,7 +1241,7 @@
       }
 
       console.log(ldata);
-      if (ldata.reponse12 == "") {
+      /* if (ldata.reponse12 == "") {
         document.getElementById("note").classList.add("is-invalid");
         // console.log("get 12");
       }
@@ -1182,7 +1251,7 @@
       }
       if (ldata.reponse17) {
         document.getElementById("note3").classList.add("is-invalid");
-      }
+      }*/
       delete ldata.reponse12;
       delete ldata.reponse14;
       delete ldata.reponse17;
@@ -1249,8 +1318,13 @@
   <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab
+    //////
 
+    ////
     function showTab(n) {
+      var stp = document.querySelectorAll(".stepper p");
+      stp.forEach((e) => e.classList.remove("actuelstep"));
+      stp[n].classList.add("actuelstep");
       // This function will display the specified tab of the form...
       var x = document.getElementsByClassName("tab");
       x[n].style.display = "block";
